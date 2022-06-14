@@ -1,4 +1,4 @@
-use crate::math::{check_expression, evaluate_expression, format_float, replace_constants};
+use crate::math::{check_expression, evaluate_expression, replace_constants};
 use eframe::egui;
 use eframe::egui::Visuals;
 use rug::Float;
