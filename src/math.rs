@@ -41,8 +41,25 @@ lazy_static! {
         ops.add(String::from("*"), Box::new(|a, b| a * b));
         ops.add(String::from("/"), Box::new(|a, b| a / b));
         ops.add(String::from("^"), Box::new(|a, b| a.pow(b)));
+        ops.add(String::from("log"), Box::new(log))
 
         ops
+    };
+}
+
+fn log(num: Float, base: Float) -> Float {
+    if base < 2 || num <= 0 {
+        return Float::new(1);
+    }
+
+    return if base == 2 {
+        num.log2()
+    } else if base == 10 {
+        num.log10()
+    } else if base.to_string_radix(10, Some(10)) == "2.7182818284" {
+        num.ln()
+    } else {
+        num.log2() / base.log2()
     };
 }
 
