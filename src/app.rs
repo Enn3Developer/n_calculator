@@ -1,18 +1,18 @@
-use crate::{check_expression, evaluate_expression, replace_constants};
-use bigdecimal::BigDecimal;
+use crate::math::{check_expression, evaluate_expression, format_float, replace_constants};
 use eframe::egui;
 use eframe::egui::Visuals;
+use rug::Float;
 
 pub struct App {
     expression: String,
-    result: BigDecimal,
+    result: Float,
 }
 
 impl Default for App {
     fn default() -> Self {
         Self {
             expression: String::new(),
-            result: BigDecimal::from(0),
+            result: Float::new(1),
         }
     }
 }
@@ -51,7 +51,7 @@ impl eframe::App for App {
                     self.calculate();
                 }
 
-                ui.label(self.result.to_string());
+                ui.label(self.result.to_string_radix(10, Some(10)));
             })
         });
     }
